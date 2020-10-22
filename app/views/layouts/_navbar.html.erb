@@ -7,8 +7,23 @@
     
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item"><%= link_to "アカウント登録", signup_path, class: "nav-link" %></li>
-        <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
+        <% if logged_in? %>
+          <li class="nav-item">イベント一覧</li>
+          <li class="nav-item">イベント作成</li>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item"><a href="#">お気に入り</a></li>
+              <li class="dropdown-item"><a href="#">作成したイベント</a></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+            </ul>
+          </li>
+      　<% else %>
+          <li class="nav-item"><a href="#" class="nav-item">イベント一覧</a></li>
+          <li class="nav-item"><%= link_to "アカウント登録", signup_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to "ログイン", login_path, class: "nav-link" %></li>
+        <% end %>
       </ul>
     </div>
   </nav>
