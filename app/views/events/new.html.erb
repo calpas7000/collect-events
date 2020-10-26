@@ -1,0 +1,40 @@
+<div class="text-center">
+  <h1>イベント作成</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @event, local: true) do |f| %>
+      <%= render "layouts/error_messages", model: f.object %>
+      
+      <div class="form-group">
+        <%= f.label :title, 'イベント名' %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :event_date, '日付' %>
+        <div>
+          <%= f.date_select:event_date,
+                         use_month_numbers:true,
+                         start_year:(Time.now.year),
+                         end_year:(Time.now.year + 5),
+                         class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :place, '場所（任意）' %>
+        <%= f.text_field :place, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :content, '詳細' %>
+        <%= f.text_area :content, class: 'form-control', rows: 5 %>
+      </div>
+
+      <%= f.submit 'イベントを作成', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>

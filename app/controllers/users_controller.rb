@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:events]
+  
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
   end
@@ -17,6 +19,12 @@ class UsersController < ApplicationController
       flash.now[:danger] = "ユーザの登録に失敗しました。"
       render :new
     end
+  end
+  
+  def events
+    @user = current_user
+    @events = @user.events.page(params[:page])
+    
   end
   
   private
