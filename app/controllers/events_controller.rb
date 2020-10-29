@@ -2,6 +2,9 @@ class EventsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
+    @events = Event.all.page(params[:page]).per(12)
+    @choice_year = prams[:year]
+    @choice_month = params[:month]
   end
   
   def create

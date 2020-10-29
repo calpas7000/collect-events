@@ -1,9 +1,38 @@
 <div class="text-center mb-4">
-  <h1><%= @this_month.month %>月のイベント</h1>
+  <h1>イベント一覧</h1>
+</div>
+
+<%= form_with(url: events, scope: :session, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.date_select :year, discard_day:true, discard_month:true, class: "form-control" %> 年
+    <%= f.submit "選択", class: "btn btn-block" %>
+  </div>
+<% end %>
+
+<div>
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item"><%= link_to "１月", events_path(month: "1"), class: "nav-link" %></li>
+    <li class="nav-item"><%= link_to "２月", events_path(month: "2") %></li>
+    <li class="nav-item"><%= link_to "３月", events_path(month: "3") %></li>
+    <li class="nav-item"><%= link_to "４月", events_path(month: "4") %></li>
+    <li class="nav-item"><%= link_to "５月", events_path(month: "5") %></li>
+    <li class="nav-item"><%= link_to "６月", events_path(month: "6") %></li>
+    <li class="nav-item"><%= link_to "７月", events_path(month: "7") %></li>
+    <li class="nav-item"><%= link_to "８月", events_path(month: "8") %></li>
+    <li class="nav-item"><%= link_to "９月", events_path(month: "9") %></li>
+    <li class="nav-item"><%= link_to "10月", events_path(month: "10") %></li>
+    <li class="nav-item"><%= link_to "11月", events_path(month: "11") %></li>
+    <li class="nav-item"><%= link_to "12月", events_path(month: "12") %></li>
+    
+  </ul>
+</div>  
+
+<div class="text-center mb-4">
+  <h1><%= @choice_month %>月のイベント</h1>
 </div>
 <ul class="list-unstyled nav nav-pulls">
   <% @events.each do |event| %>
-    <% if (@this_month_day.include?(Date.parse(event[:event_date].to_s))) %>
+    <% if event.year == @choice_year && event.month == @choice_month %>
       <li class="mb-3 col-sm-4">
         <div class="card">
           <div class="card-header">
@@ -23,7 +52,3 @@
     <% end %>
   <% end %>
 </ul>
-
-<div class="text-center mb-4">
-  <h1><%= @next_month.month %>月のイベント</h1>
-</div>
