@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   end
   
   resources :events, only: [:create, :destroy, :show, :new]
+
+  get "events/:year/:month", to: "events#index"
 end

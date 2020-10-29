@@ -27,30 +27,3 @@
 <div class="text-center mb-4">
   <h1><%= @next_month.month %>月のイベント</h1>
 </div>
-
-<ul class="list-unstyled nav nav-pulls">
-  <% @events.each do |event| %>
-    <% if (@next_month_day.include?(Date.parse(event[:event_date].to_s))) %>
-      <li class="mb-3 col-sm-4">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><%= link_to event.title, event_path(event) %></h3>
-          </div>
-          <div class="card-body">
-            <div>
-              <h5><%= event.event_date %></h5>
-              <h5><%= event.place %></h5>
-            </div>
-            <div>
-              <p><%= event.content %></p>
-            </div>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
-
-<div class="text-center mb-4">
-  <h2>イベント一覧</h2>
-</div>

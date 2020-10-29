@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
+  def index
+  end
+  
   def create
     @event = current_user.events.build(event_params)
     if @event.save
