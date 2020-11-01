@@ -16,11 +16,9 @@
       <div class="form-group">
         <%= f.label :event_date, '日付' %>
         <div>
-          <%= f.date_select:event_date,
-                         use_month_numbers:true,
-                         start_year:(Time.now.year),
-                         end_year:(Time.now.year + 5),
-                         class: "form-control" %>
+          <%= f.date_field :event_date,
+                           min: Time.zone.now,
+                           class: "form-control" %>
         </div>
       </div>
 

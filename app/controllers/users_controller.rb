@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   
   def events
     @user = current_user
-    @events = @user.events.page(params[:page])
+    @events = @user.events.order(event_date: "DESC").page(params[:page])
     
   end
   

@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <li class="nav-item nav-link mr-3"><%= link_to "イベント一覧" , events_path(year: Time.zone.today.year, month: Time.zone.today.month), class: "nav-link" %></li>
+          <li class="nav-item nav-link mr-3"><%= link_to "イベント一覧" , events_path, class: "nav-link" %></li>
           <li class="nav-item mr-3"><%= link_to "イベント作成", new_event_path, class: "nav-link" %></li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>

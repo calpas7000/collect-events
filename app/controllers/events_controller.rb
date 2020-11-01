@@ -2,9 +2,11 @@ class EventsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    @events = Event.all.page(params[:page]).per(12)
-    @choice_year = prams[:year]
-    @choice_month = params[:month]
+    @search_params = event_search_params
+    if @search_params.empty?
+      @search_params[:event_date_from] = Time.zone.now
+    end
+    @events = Event.search(@search_params).order(event_date: "ASC").page(params[:page]).per(12)
   end
   
   def create
@@ -43,5 +45,9 @@ class EventsController < ApplicationController
     unless @event
       redirect_back(fallback_location: root_path)
     end
+  end
+  
+  def event_search_params
+    params.fetch(:search, {}).permit(:search_word, :event_date_from, :event_date_to, :place)
   end
 end
