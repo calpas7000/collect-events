@@ -1,0 +1,23 @@
+<div class="text-center mb-4">
+  <h1>お気に入り</h1>
+</div>
+<ul class="list-unstyled nav nav-pulls">
+  <% @favorite_events.each do |event| %>
+    <li class="mb-3 col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><%= link_to event.title, event_path %></h3>
+        </div>
+        <div class="card-body">
+          <div>
+            <h5><%= event.event_date %></h5>
+            <h5><%= event.place %></h5>
+          </div>
+          <div>
+            <p><%= event.content %></p>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

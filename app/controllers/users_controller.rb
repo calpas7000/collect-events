@@ -27,6 +27,12 @@ class UsersController < ApplicationController
     
   end
   
+  def favorite_events
+    @user = current_user
+    @favorite_events = @user.favorite_events.page(params[:page]).per(12)
+    counts_user(@user)
+  end
+  
   private
   
   def user_params

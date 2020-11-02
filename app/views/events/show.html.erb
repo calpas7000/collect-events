@@ -4,8 +4,9 @@
 <div class="row">
   <p>コメント：</p>
   <p>お気に入り：</p>
+  <%= render "favorites/favorite_button", event: @event %>
   <% if current_user == @event.user %>
-    <%= link_to "Delete", @event, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+    <%= link_to "イベントを削除", @event, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm btn-group' %>
   <% end %>
 </div>
 <div class="row">

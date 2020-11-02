@@ -6,6 +6,12 @@ class Event < ApplicationRecord
   validates :event_date, presence: true
   validates :content, presence: true, length: { maximum: 4294967296 }
   
+  has_many :favorites
+  has_many :reverses_of_favorite, class_name: "Favorite", foreign_key: "user_id"
+  has_many :favorite_users, through: :reverses_of_favorite, source: :user
+  
+  has_many :favorites, dependent: :destroy
+  
   scope :search, -> (search_params) do
     return if search_params.blank?
     
