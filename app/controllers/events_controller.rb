@@ -32,6 +32,9 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @comment = @event.comments.build
+    @comments = @event.comments.order(id: :desc)
+    counts_event(@event)
   end
   
   private

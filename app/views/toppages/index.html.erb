@@ -17,6 +17,10 @@
             <div>
               <p><%= event.content %></p>
             </div>
+            <div class="row">
+              <p>コメント： <%= event.comments.count %></p>
+              <p>お気に入り： <%= event.favorites.count %></p>
+            </div>
           </div>
         </div>
       </li>
@@ -43,6 +47,10 @@
             </div>
             <div>
               <p><%= event.content %></p>
+            </div>
+            <div class="row">
+              <p>コメント： <%= event.comments.count %></p>
+              <p>お気に入り： <%= event.favorites.count %></p>
             </div>
           </div>
         </div>

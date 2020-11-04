@@ -14,6 +14,10 @@ class User < ApplicationRecord
   
   has_many :favorite, dependent: :destroy
   
+  has_many :comments
+  has_many :comment_events, through: :comments, source: :event
+  has_many :reverses_of_comment, class_name: "Comment", foreign_key: "event_id"
+  
   def add_favorite(event)
     self.favorites.find_or_create_by(event_id: event.id)
   end
@@ -26,4 +30,6 @@ class User < ApplicationRecord
   def favorite?(event)
     self.favorite_events.include?(event)
   end
+  
+  
 end

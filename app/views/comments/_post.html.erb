@@ -1,0 +1,16 @@
+<p>コメント</p>
+<% if logged_in? %>
+  <div class="post">
+    <%= form_with(model: @comment, local: true) do |f| %>
+      <div class="form-group">
+        <%= hidden_field_tag :event_id, @event.id %>
+        <%= f.text_area :content, class: "form-control mb-2" %>
+        <span><%= f.submit "投稿", class: "btn btn-block btn-secondary col-sm-3" %></span>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="login">
+    <span class="text_muted"><%= link_to "ログイン", login_path %>してコメントを投稿</span>
+  </div>
+<% end %>

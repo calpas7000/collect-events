@@ -12,6 +12,10 @@ class Event < ApplicationRecord
   
   has_many :favorites, dependent: :destroy
   
+  has_many :comments
+  has_many :reverses_of_comment, class_name: "Comment", foreign_key: "user_id"
+  has_many :comment_users, through: :reverses_of_comment, source: :user
+  
   scope :search, -> (search_params) do
     return if search_params.blank?
     

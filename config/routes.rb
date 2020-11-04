@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   resources :events, only: [:index,:create, :destroy, :show, :new]
   
   resources :favorites, only: [:create, :destroy]
+  
+  resources :comments, only: [:create, :destroy]
 end

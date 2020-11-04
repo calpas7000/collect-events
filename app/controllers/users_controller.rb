@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:events]
   
-  def index
-    @users = User.order(id: :desc).page(params[:page]).per(25)
-  end
 
   def new
     @user = User.new
@@ -24,7 +21,6 @@ class UsersController < ApplicationController
   def events
     @user = current_user
     @events = @user.events.order(event_date: "DESC").page(params[:page])
-    
   end
   
   def favorite_events
