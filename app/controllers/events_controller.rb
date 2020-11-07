@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :correct_user, only: [:destroy]
+  before_action :require_user_logged_in, only: [:create, :new, :destroy]
   
   def index
     @search_params = event_search_params

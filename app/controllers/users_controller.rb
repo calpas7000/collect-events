@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:events]
+  before_action :require_user_logged_in, only: [:events, :favorite_events]
   
 
   def new
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   
   def favorite_events
     @user = current_user
-    @favorite_events = @user.favorite_events.page(params[:page]).per(12)
+    @events = @user.favorite_events.page(params[:page]).per(12)
     counts_user(@user)
   end
   
