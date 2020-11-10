@@ -5,13 +5,13 @@ class FavoritesController < ApplicationController
     event = Event.find(params[:event_id])
     current_user.add_favorite(event)
     flash[:success] = "イベントをお気に入りに追加しました。"
-    redirect_back(fallback_location: root_path)
+    redirect_to event
   end
 
   def destroy
     event = Event.find(params[:event_id])
     current_user.delete_favorite(event)
     flash[:success] = "イベントをお気に入りから削除しました。"
-    redirect_back(fallback_location: root_path)
+    redirect_to event
   end
 end

@@ -22,9 +22,10 @@
   </div>
 </div>
 <div class="comment">
-  <%= render "comments/post", comments: @comments %>
+  
+  <%= render "comments/post", comment: @comment %>
   <%= render "comments/comments", comments: @comments %>
   <% if @count_comments > 20 %>
-    <%= render "comments/post", comments: @comments %>
+    <%= render "comments/post", comment: @comment %>
   <% end %>
 </div>

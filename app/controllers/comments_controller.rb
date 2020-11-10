@@ -8,8 +8,10 @@ class CommentsController < ApplicationController
       flash[:success] = "コメントを投稿しました。"
       redirect_to @event
     else
+      @comments = @event.comments.order(id: :desc)
+      counts_event(@event)
       flash.now[:danger] = "コメントの投稿に失敗しました。"
-      redirect_back(fallback_location: root_path)
+      render "events/show"
     end
   end
 

@@ -1,6 +1,5 @@
 <p>コメント</p>
 <% if logged_in? %>
-  <div class="post">
     <%= form_with(model: @comment, local: true) do |f| %>
       <%= render "layouts/error_messages", model: f.object %>
       <div class="form-group">
