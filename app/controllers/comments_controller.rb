@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_user_logged_in
+  before_action :correct_comment_user, only: [:destroy]
   
   def create
     @event = Event.find(params[:event_id])
@@ -16,14 +17,25 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @commnet.destroy
+    @comment.destroy
     flash[:success] = "コメントを削除しました。"
-    redirect_back(fallback_location: root_path)
+    redirect_to @event
   end
-end
 
-private
-
-def comment_params
-  params.require(:comment).permit(:content)
+  private
+  
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
+  
+  def correct_comment_user
+    @event = Event.find(params[:event_id])
+    comment_author = current_user.comments.find_by(id: params[:id])
+    event_author = current_user.events.find_by(id: params[:event_id])
+    unless comment_author or event_author
+      redirect_to @event
+    else
+      @comment = Comment.find(params[:id])
+    end
+  end
 end

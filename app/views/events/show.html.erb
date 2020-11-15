@@ -1,7 +1,6 @@
 <div class="event">
   <h2><%= @event.title %></h2>
   <p><%= @event.event_date %></p>
-  <p><%= @event.place %></p>
   <div class="row">
     <p>コメント： <%= @count_comments %></p>
     <p>お気に入り： <%= @count_favorites %></p>
@@ -24,7 +23,7 @@
 <div class="comment">
   
   <%= render "comments/post", comment: @comment %>
-  <%= render "comments/comments", comments: @comments %>
+  <%= render "comments/comments", comments: @comments, event: @event %>
   <% if @count_comments > 20 %>
     <%= render "comments/post", comment: @comment %>
   <% end %>

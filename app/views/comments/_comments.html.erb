@@ -5,6 +5,17 @@
       <div class="media-body">
         <div>
           <p><span><%= comment.id %>. </span><%= comment.user.name %> <span class="text-muted">投稿日 <%= comment.created_at %></span></p>
+          <% if current_user == comment.user or current_user == @event.user %>
+            <a href="#" class="nav-link justify-content-end" data-toggle="dropdown"><i class="fas fa-pencil-alt"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= form_with(model: comment, local: true, method: :delete, data: { confirm: "You sure?" }) do |f| %>
+                  <%= hidden_field_tag :event_id, event.id %>
+                  <%= f.submit "コメントを削除", class: "btn-danger btn btn-sm btn-group" %>
+                <% end %>
+              </li>
+            </ul>
+          <% end %>
         </div>
         <div>
           <p><%= comment.content %></p>

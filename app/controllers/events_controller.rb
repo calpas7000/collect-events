@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_event_user, only: [:destroy]
   before_action :require_user_logged_in, only: [:create, :new, :destroy]
   
   def index
@@ -41,10 +41,10 @@ class EventsController < ApplicationController
   private
   
   def event_params
-    params.require(:event).permit(:title, :event_date, :place, :content)
+    params.require(:event).permit(:title, :event_date, :content, :other, :pc, :ps4, :ps5, :xbox_one, :xbox_series_xs, :switch, :smartphone)
   end
   
-  def correct_user
+  def correct_event_user
     @event = current_user.events.find_by(id: params[:id])
     unless @event
       redirect_back(fallback_location: root_path)
@@ -52,6 +52,6 @@ class EventsController < ApplicationController
   end
   
   def event_search_params
-    params.fetch(:search, {}).permit(:search_word, :event_date_from, :event_date_to, :place)
+    params.fetch(:search, {}).permit(:search_word, :event_date_from, :event_date_to )
   end
 end

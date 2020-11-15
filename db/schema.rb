@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_02_125613) do
+ActiveRecord::Schema.define(version: 2020_11_15_053953) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -24,12 +24,21 @@ ActiveRecord::Schema.define(version: 2020_11_02_125613) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
-    t.string "place"
     t.date "event_date", null: false
     t.text "content"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "geme_title"
+    t.string "entry"
+    t.boolean "other", default: false, null: false
+    t.boolean "pc", default: false, null: false
+    t.boolean "ps4", default: false, null: false
+    t.boolean "ps5", default: false, null: false
+    t.boolean "xbox_one", default: false, null: false
+    t.boolean "xbox_series_xs", default: false, null: false
+    t.boolean "switch", default: false, null: false
+    t.boolean "smartphone", default: false, null: false
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
