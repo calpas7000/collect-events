@@ -3,13 +3,15 @@
 </div>
 
 <%= render "events/events", events: @this_month %>
+<%= paginate @this_month %>
 
 <div class="text-center mb-4">
   <h1><%= @next_month_day.month %>月のイベント</h1>
 </div>
 
 <%= render "events/events", events: @next_month %>
+<%= paginate @next_month %>
 
 <div class="text-center mb-4">
-  <h2><%= link_to "イベント一覧" , events_path(year: Time.zone.today.year, month: Time.zone.today.month) %></h2>
+  <h2><%= link_to "さらに表示" , events_path(year: Time.zone.today.year, month: Time.zone.today.month) %></h2>
 </div>
