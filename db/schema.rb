@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_053953) do
+ActiveRecord::Schema.define(version: 2020_11_23_044740) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_053953) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "geme_title"
+    t.string "game_title"
     t.string "entry"
     t.boolean "other", default: false, null: false
     t.boolean "pc", default: false, null: false

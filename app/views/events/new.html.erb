@@ -9,8 +9,42 @@
       <%= render "layouts/error_messages", model: f.object %>
       
       <div class="form-group">
-        <%= f.label :title, 'イベント名' %>
+        <%= f.label :title, '大会名' %>
         <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      
+      <div>
+        プラットフォーム
+      </div>
+      <div class="form-group border rounded pt-1">
+        <%= f.label :pc, "pc", class: "ml-2" %>
+        <%= f.check_box :pc, {}, "pc_t", "pc_f" %>
+        
+        <%= f.label :ps4, "ps4", class: "ml-2" %>
+        <%= f.check_box :ps4, {}, "ps4_t", "ps4_f" %>
+        
+        <%= f.label :ps5, "ps5", class: "ml-2" %>
+        <%= f.check_box :ps5, {}, "ps5_t", "ps5_f" %>
+        
+        <%= f.label :xbox_one, "xbox_one", class: "ml-2" %>
+        <%= f.check_box :xbox_one, {}, "xbox_one_t", "xbox_one_f" %>
+        
+        <%= f.label :xbox_series_xs, "xbox_series_xs", class: "ml-2" %>
+        <%= f.check_box :xbox_series_xs, {}, "xbox_series_xs_t", "xbox_series_xs_f" %>
+        
+        <%= f.label :switch, "switch", class: "ml-2" %>
+        <%= f.check_box :switch, {}, "switch_t", "switch_f" %>
+        
+        <%= f.label :smartphone, "smartphone", class: "ml-2" %>
+        <%= f.check_box :smartphone, {}, "smartphone_t", "smartphone_f" %>
+        
+        <%= f.label :other, "other", class: "ml-2" %>
+        <%= f.check_box :other, {}, "other_t", "other_f" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :game_title, 'ゲームタイトル' %>
+        <%= f.text_field :game_title, class: 'form-control' %>
       </div>
 
       <div class="form-group">
@@ -20,6 +54,11 @@
                            min: Time.zone.now,
                            class: "form-control" %>
         </div>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :entry, 'エントリー' %>
+        <%= f.text_field :entry, class: 'form-control' %>
       </div>
 
       <div class="form-group">
