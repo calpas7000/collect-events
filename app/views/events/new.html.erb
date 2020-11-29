@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h1>イベント作成</h1>
+  <h1>イベント概要</h1>
 </div>
 
 <div class="row">
@@ -9,11 +9,20 @@
       <%= render "layouts/error_messages", model: f.object %>
       
       <div class="form-group">
-        <%= f.label :title, '大会名' %>
+        <%= f.label :title, 'タイトル' %>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
       
-      <div>
+      <div class="form-group">
+        <%= f.label :event_date, '開催日' %>
+        <div>
+          <%= f.date_field :event_date,
+                           min: Time.zone.now,
+                           class: "form-control" %>
+        </div>
+      </div>
+      
+      <div class="mb-2">
         プラットフォーム
       </div>
       <div class="form-group border rounded pt-1">
@@ -45,15 +54,6 @@
       <div class="form-group">
         <%= f.label :game_title, 'ゲームタイトル' %>
         <%= f.text_field :game_title, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :event_date, '日付' %>
-        <div>
-          <%= f.date_field :event_date,
-                           min: Time.zone.now,
-                           class: "form-control" %>
-        </div>
       </div>
       
       <div class="form-group">

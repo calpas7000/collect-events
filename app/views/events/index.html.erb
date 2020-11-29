@@ -1,25 +1,50 @@
 <div class="text-center mb-4">
-  <h1>イベント一覧</h1>
+  <h1>大会一覧</h1>
 </div>
 
 <div class="row">
   <div class="search-form col-sm-6">
     <%= form_with(scope: :search, url: events_path,method: :get, local: true) do |f| %>
-      <div class="field form-group">
-        <%= f.label(:search_word, "イベント名、詳細") %>
-        <%= f.text_field :search_word, value: @search_params[:search_word], class: "form-control col-sm-6" %>
+      <div class="field mb-3">
+        <i class="fas fa-search"></i>
+        <%= f.text_field :search_words, value: @search_params[:search_words], placeholder: "ゲームタイトル　詳細", class: "col-sm-6" %>
+        <span class="text-muted">※スペースで複数ワード検索</span>
+      </div>
+      
+      <div class="mb-2">
+        プラットフォーム
+      </div>
+      <div class="form-group border rounded pt-1">
+        <%= f.label :pc, "pc", class: "ml-2" %>
+        <%= f.check_box :pc, checked_value: @search_params[:pc], unchecked_value: nil %>
+        
+        <%= f.label :ps4, "ps4", class: "ml-2" %>
+        <%= f.check_box :ps4, checked_value: @search_params[:ps4], unchecked_value: nil %>
+        
+        <%= f.label :ps5, "ps5", class: "ml-2" %>
+        <%= f.check_box :ps5, checked_value: @search_params[:ps5], unchecked_value: nil %>
+        
+        <%= f.label :xbox_one, "xbox_one", class: "ml-2" %>
+        <%= f.check_box :xbox_one, checked_value: @search_params[:xbox_one], unchecked_value: nil %>
+        
+        <%= f.label :xbox_series_xs, "xbox_series_xs", class: "ml-2" %>
+        <%= f.check_box :xbox_series_xs, checked_value: @search_params[:xbox_series_xs], unchecked_value: nil %>
+        
+        <%= f.label :switch, "switch", class: "ml-2" %>
+        <%= f.check_box :switch, checked_value: @search_params[:switch], unchecked_value: nil %>
+        
+        <%= f.label :smartphone, "smartphone", class: "ml-2" %>
+        <%= f.check_box :smartphone, checked_value: @search_params[:smartphone], unchecked_value: nil %>
+        
+        <%= f.label :other, "other", class: "ml-2" %>
+        <%= f.check_box :other, checked_value: @search_params[:other], unchecked_value: nil %>
       </div>
       
       <div class="field form-group">
-        <%= f.label(:event_date, "日付") %>
+        <%= f.label(:event_date, "開催日") %>
         <div class="row">
           <%= f.date_field :event_date_from, value: @search_params[:event_date_from], class: "form-control col-4 ml-3 mr-3" %> ～ <%= f.date_field :event_date_to, value: @search_params[:event_date_to], class: "form-control col-4 ml-3 mr-3" %>
         </div>
-      </div>
-      
-      <div class="field form-group">
-        <%= f.label(:place, "場所") %>
-        <%= f.text_field :place, value: @search_params[:place], class: "form-control col-sm-6" %>
       </div>
       
       <div class="actions">

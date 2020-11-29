@@ -4,10 +4,30 @@ class EventsController < ApplicationController
   
   def index
     @search_params = event_search_params
-    if @search_params.empty?
-      @search_params[:event_date_from] = Time.zone.now
+    @search_params[:event_date_from] = Time.zone.now if @search_params[:event_date_from].blank?
+    
+    search_events = Event.search(@search_params)
+    
+    if @search_params[:search_words].present?
+      keywords = []
+      @events = []
+      split_search_words = @search_params[:search_words].split(/[[:blank:]]+/)
+      split_search_words.each do |search_word|
+        next if search_word == ""
+        keywords += Event.where("title LIKE(?) OR content LIKE(?) OR game_title LIKE(?)", "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
+      end
+      keywords.uniq!
+    
+      keywords.each do |keyword|
+        @events.push(keyword) if search_events.include?(keyword)
+      end
+      
+    else
+      @events = search_events
     end
-    @events = Event.search(@search_params).order(event_date: "ASC").page(params[:page]).per(12)
+    
+    @events = @events.sort_by{|ms|ms.event_date}
+    @events = Kaminari.paginate_array(@events).page(params[:page]).per(12)
   end
   
   def create
@@ -41,7 +61,7 @@ class EventsController < ApplicationController
   private
   
   def event_params
-    params.require(:event).permit(:title, :game_title, :event_date, :entry, :content, :other, :pc, :ps4, :ps5, :xbox_one, :xbox_series_xs, :switch, :smartphone)
+    params.require(:event).permit(:title, :event_date, :game_title, :entry, :content, :other, :pc, :ps4, :ps5, :xbox_one, :xbox_series_xs, :switch, :smartphone)
   end
   
   def correct_event_user
@@ -52,6 +72,6 @@ class EventsController < ApplicationController
   end
   
   def event_search_params
-    params.fetch(:search, {}).permit(:search_word, :event_date_from, :event_date_to )
+    params.fetch(:search, {}).permit(:search_words, :event_date_from, :event_date_to, :pc, :ps4, :ps5, :xbox_one, :xbox_series_xs, :switch, :smartphone, :other)
   end
 end

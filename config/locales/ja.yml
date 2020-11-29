@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      event:
+        smartphone: 'スマホ'
+        other: 'その他'
