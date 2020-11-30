@@ -51,12 +51,22 @@
             </tr>
             <tr>
               <td>Entry： </td>
-              <td><%= event.entry %></td>
+              <td>
+                <% if event.entry&.include?("http") %>
+                  <%= raw Rinku.auto_link(h(event.entry)).truncate(125, separator: /\R/) %>
+                <% else %>
+                  <%= raw Rinku.auto_link(h(event.entry)).truncate(50, separator: /\R/) %>
+                <% end %>
+              </td>
             </tr>
           </table>
           <div>
             <h6 class="text-center">詳細</h6>
-            <p><%= event.content %></p>
+            <div>
+              <table>
+                <td><%= raw Rinku.auto_link(h(event.content.truncate(100, omission: " ..."))) %></td>
+              </table>
+            </div>
           </div>
           <div class="row">
             <p>コメント： <%= event.comments.count %></p>

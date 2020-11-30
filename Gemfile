@@ -58,3 +58,5 @@ group :production do
 end
 
 gem "enum_help"
+
+gem "rinku"

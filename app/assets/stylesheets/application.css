@@ -24,3 +24,15 @@
   margin-left:20px;
   font-size:17px;
 }
+
+table {
+width: 100%;
+table-layout: fixed;
+word-break: break-all;
+word-wrap: break-all;
+}
+
+.event-content {
+  word-break: break-all;
+  word-wrap: break-all;
+}
