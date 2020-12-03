@@ -1,12 +1,12 @@
 <div class="event">
   <h2><%= @event.title %></h2>
-  <p><%= @event.event_date %></p>
   <div class="row">
     <p>コメント： <%= @count_comments %></p>
-    <p>お気に入り： <%= @count_favorites %></p>
+    <p class="ml-4">お気に入り： <%= @count_favorites %></p>
     <%= render "favorites/favorite_button", event: @event %>
     <% if current_user == @event.user %>
-      <%= link_to "イベントを削除", @event, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm btn-group' %>
+      <%= link_to "イベントを編集", edit_event_path(@event), class: "btn btn-outline-dark ml-3" %>
+      <%= link_to "イベントを削除", @event, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-outline-danger ml-3' %>
     <% end %>
   </div>
   <div class="row">
@@ -17,11 +17,57 @@
       <p><%= @event.user.name %></p>
       <p><span class="text-muted"> 作成日 <%= @event.created_at %></span></p>
     </div>
-      <p><%= @event.content %></P>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <td>開催日： </td>
+      <td><%= @event.event_date %></td>
+    </tr>
+    <tr>
+      <td>Platform： </td>
+      <td>
+        <% if @event.pc == true %>
+          pc
+        <% end %>
+        <% if @event.ps4 == true %>
+          ps4 
+        <% end %>
+        <% if @event.ps5 == true %>
+          ps5 
+        <% end %>
+        <% if @event.xbox_one == true %>
+          xbox_one
+        <% end %>
+        <% if @event.xbox_series_xs == true %>
+          xbox_series_xs
+        <% end %>
+        <% if @event.switch == true %>
+          switch
+        <% end %>
+        <% if @event.smartphone == true %>
+          smartphone
+        <% end %>
+        <% if @event.other == true %>
+          other
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>Game： </td>
+      <td><%= @event.game_title %></td>
+    </tr>
+    <tr>
+      <td>Entry： </td>
+      <td><%= raw Rinku.auto_link(h(@event.entry)) %></td>
+    </tr>
+  </table>
+  <div class="content">
+    <p><%= raw Rinku.auto_link(h(@event.content)) %></p>
   </div>
 </div>
-<div class="comment">
-  
+
+<div class="comment">  
   <%= render "comments/post", comment: @comment %>
   <%= render "comments/comments", comments: @comments, event: @event %>
   <% if @count_comments > 20 %>

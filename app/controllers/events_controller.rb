@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :set_event, only: [:show, :edit, :update]
   before_action :correct_event_user, only: [:destroy]
   before_action :require_user_logged_in, only: [:create, :new, :destroy]
   
@@ -29,6 +30,16 @@ class EventsController < ApplicationController
     @events = @events.sort_by{|ms|ms.event_date}
     @events = Kaminari.paginate_array(@events).page(params[:page]).per(12)
   end
+
+  def show
+    @comment = @event.comments.build
+    @comments = @event.comments.order(id: :desc)
+    counts_event(@event)
+  end
+
+  def new
+    @event = Event.new
+  end
   
   def create
     @event = current_user.events.build(event_params)
@@ -40,9 +51,20 @@ class EventsController < ApplicationController
       render :new
     end
   end
-
-  def new
-    @event = Event.new
+  
+  def edit
+    @comments = @event.comments.order(id: :desc)
+    counts_event(@event)
+  end
+  
+  def update
+    if @event.update(event_params)
+      flash[:success] = "イベントが編集されました。"
+      redirect_to @event
+    else
+      flash.now[:danger] = "イベントの編集に失敗しました。"
+      render :edit
+    end
   end
 
   def destroy
@@ -50,15 +72,12 @@ class EventsController < ApplicationController
     flash[:success] = "イベントを削除しました。"
     redirect_to root_url
   end
-
-  def show
-    @event = Event.find(params[:id])
-    @comment = @event.comments.build
-    @comments = @event.comments.order(id: :desc)
-    counts_event(@event)
-  end
   
   private
+  
+  def set_event
+    @event = Event.find(params[:id])
+  end
   
   def event_params
     params.require(:event).permit(:title, :event_date, :game_title, :entry, :content, :other, :pc, :ps4, :ps5, :xbox_one, :xbox_series_xs, :switch, :smartphone)

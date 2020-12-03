@@ -69,8 +69,8 @@
             </div>
           </div>
           <div class="row">
-            <p>コメント： <%= event.comments.count %></p>
-            <p class="ml-4">お気に入り： <%= event.favorites.count %></p>
+            <p><i class="fas fa-comment-dots"></i> <%= event.comments.count %></p>
+            <p class="ml-4"><i class="fas fa-heart"></i> <%= event.favorites.count %></p>
           </div>
           <p class="text-muted">作成日： <%= event.created_at %></p>
         </div>

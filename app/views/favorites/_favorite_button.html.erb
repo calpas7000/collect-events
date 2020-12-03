@@ -2,12 +2,12 @@
   <% if current_user.favorite?(event) %>
     <%= form_with(model: current_user.favorites.find_by(event_id: event.id), local: true, method: :delete) do |f| %>
       <%= hidden_field_tag :event_id, event.id %>
-      <%= f.submit "お気に入りから削除", class: "btn-light btn btn-sm btn-group" %>
+      <%= f.submit "お気に入りから削除", class: "btn-secondary btn ml-5" %>
     <% end %>
   <% else %>
     <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
       <%= hidden_field_tag :event_id, event.id %>
-      <%= f.submit "お気に入りに追加", class: "btn-primary btn btn-sm btn-group" %>
+      <%= f.submit "お気に入りに追加", class: "btn-outline-primary btn ml-5" %>
     <% end %>
   <% end %>
 <% end %>
