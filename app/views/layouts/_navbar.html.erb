@@ -13,6 +13,7 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
             <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item"><%= link_to "アカウント管理", user_path(current_user) %></li>
               <li class="dropdown-item"><%= link_to "お気に入り", favorites_user_path(current_user) %></li>
               <li class="dropdown-item"><%= link_to "投稿一覧", events_user_path(current_user) %></li>
               <li class="dropdown-divider"></li>

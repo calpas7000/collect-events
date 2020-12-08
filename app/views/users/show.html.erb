@@ -1,0 +1,23 @@
+<div class="user_profile">
+  <div class="row">
+    <aside class="col-sm-2">
+      <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 75 }) %>" alt="">
+    </aside>
+    <div class="col-sm-10">
+      <h3><%= @user.name %></h3>
+      <%= link_to "ユーザー情報を編集", edit_user_path(@user), remote: true, class: "btn btn-outline-dark ml-3" %>
+      <%= link_to "ユーザーを削除", @user, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger ml-3' %>
+    </div>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <td>開催日： </td>
+      <td><%= @user.email %></td>
+    </tr>
+      <td></td>
+      <td></td>
+    </tr>
+</div>
+
+<div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

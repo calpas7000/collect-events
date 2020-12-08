@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:events, :favorite_events]
-  before_action :login_user, only: [:show, :edit, :events, :favorite_events]
+  before_action :set_user, only: [:show, :edit, :update, :events, :favorite_events]
   
   def show
   end
@@ -13,8 +13,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
+      log_in @user
       flash[:success] = "ユーザを登録しました。"
-      redirect_to login_path
+      redirect_to root_path
     else
       flash.now[:danger] = "ユーザの登録に失敗しました。"
       render :new
@@ -22,6 +23,32 @@ class UsersController < ApplicationController
   end
   
   def edit
+  end
+  
+  def update
+    if @user.update(user_params)
+      flash[:success] = "アカウントを更新しました。"
+      redirect_to @user
+    else
+      flash.now[:danger] = "アカウントの編集に失敗しました。"
+      render :edit
+    end
+    
+      # respond_to do |format|
+      #   if @user.update(user_params)
+      #     format.html { redirect_to @user }
+      #     format.js
+      #   else
+      #     format.html { render :edit }
+      #     format.js { render :errors }
+      #   end
+      # end
+  end
+  
+  def destroy
+    @user.destroy
+    flash[:success] = "ユーザーを削除しました。"
+    redirect_to root_url
   end
   
   def events
@@ -36,10 +63,16 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
   end
   
-  def login_user
+  def set_user
     @user = current_user
+  end
+  
+  # 正しいユーザーか確認
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 end

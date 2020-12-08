@@ -4,8 +4,11 @@ class ApplicationController < ActionController::Base
   
   private
   
+  # ログイン済みユーザーか確認
   def require_user_logged_in
     unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
       redirect_to login_url
     end
   end
