@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:events, :favorite_events]
-  before_action :set_user, only: [:show, :edit, :update, :events, :favorite_events]
+  before_action :require_user_logged_in, only: [:show, :edit, :update, :destroy, :events, :favorite_events]
+  before_action :set_user, only: [:events, :favorite_events]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
+  before_action :correct_or_admin_user, only: :show
   
   def show
   end
@@ -46,8 +49,8 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
-    flash[:success] = "ユーザーを削除しました。"
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
     redirect_to root_url
   end
   
@@ -73,6 +76,12 @@ class UsersController < ApplicationController
   # 正しいユーザーか確認
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    redirect_to root_url unless current_user?(@user)
+  end
+  
+  # ログイン済みのユーザーもしくは管理者か確認
+  def correct_or_admin_user
+    @user = User.find(params[:id])
+    redirect_to root_url unless current_user?(@user) || current_user.admin?
   end
 end

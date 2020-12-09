@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  # 管理者か確認
+  def admin_user
+    redirect_to root_path unless current_user.admin?
+  end
+  
   def counts_user(user)
     @count_favorite_events = user.favorite_events.count
   end

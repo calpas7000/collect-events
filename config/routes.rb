@@ -6,11 +6,15 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   get "signup", to: "users#new"
-  resources :users, only: [:new, :create, :show, :edit, :update, :dastroy] do
+  resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
     member do
       get :events
       get :favorites, to: "users#favorite_events"
     end
+  end
+  
+  namespace :admin do
+    resources :users, only: [:index]
   end
   
   resources :events, only: [:index,:create, :destroy, :show, :new, :edit, :update]
