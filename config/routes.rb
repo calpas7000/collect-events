@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end
   
-  resources :events, only: [:index,:create, :destroy, :show, :new, :edit, :update]
+  resources :account_activations, only: [:edit]
+  
+  resources :events
   
   resources :favorites, only: [:create, :destroy]
   
