@@ -1,25 +1,39 @@
 <div class="user_profile">
   <div class="row">
     <aside class="col-sm-2">
-      <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 75 }) %>" alt="">
+      <%= render "users/icon", user: @user %>
+      <%= link_to "アバターを変更", edit_user_path(@user, edit: "image"), remote: true, class: "btn btn-outline-dark ml-3" %>
     </aside>
     <div class="col-sm-10">
       <h3><%= @user.name %></h3>
-      <%= link_to "ユーザー情報を編集", edit_user_path(@user), remote: true, class: "btn btn-outline-dark ml-3" %>
       <% if current_user.admin? %>
         <%= link_to "ユーザーを削除", @user, method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger ml-3' %>
       <% end %>
+      <%= link_to "アバターを削除", user_path(@user, remove: "true"), method: :patch, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger ml-3' %>
     </div>
   </div>
   
   <table class="table">
     <tr>
+      <td>UserName： </td>
+      <td><%= @user.name %></td>
+      <td><%= link_to "ユーザー名を編集", edit_user_path(@user, edit: "name"), remote: true, class: "btn btn-outline-dark" %></td>
+    </tr>
+    
+    <tr>
       <td>Email： </td>
-      <td><%= @user.email %></td>
+      <td>
+        <%= @user.email %>
+        <%= render "activation_button", user: @user %>
+      </td>
+      <td><%= link_to "メールアドレスを編集", edit_user_path(@user, edit: "email"), remote: true, class: "btn btn-outline-dark" %></td>
     </tr>
-      <td></td>
-      <td></td>
+    
+    <tr>
+      <td>Password </td>
+      <td><%= link_to "パスワードの変更", edit_password_reset_url(email: @user.email), class: "btn btn-outline-dark" %></td>
     </tr>
+  </table>
 </div>
 
 <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

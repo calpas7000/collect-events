@@ -1,6 +1,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <%= form_for(@user, remote: true) do |f| %>
+      <%= render "layouts/error_messages", model: f.object %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -9,19 +10,14 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <%= f.label :name %><br>
-          <%= f.text_field :name, class: "form-control" %>
-        </div>
-        <div class="field">
           <%= f.label :email %><br>
           <%= f.text_field :email, class: "form-control" %>
         </div>
       
-      <div class="form-group">
-        <%= f.label :password, "password" %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      
+        <div class="form-group">
+          <%= f.label :password, "現在のpassword" %>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
       </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

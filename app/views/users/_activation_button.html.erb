@@ -1,0 +1,5 @@
+<% if user.activated? %>
+  <button type="button" class="btn btn-secondary", disabled>認証済み</button>
+<% else %>
+  <%= button_to "認証する", { controller: "users", action: "activation" }, { method: :post, class: "btn btn-primary" } %>
+<% end %>

@@ -60,3 +60,5 @@ end
 gem "rinku"
 
 gem "carrierwave"
+
+gem "faker"

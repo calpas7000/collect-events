@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -46,11 +46,37 @@ class User < ApplicationRecord
     update_column(activated: true, activated_at: Time.zone.now)
   end
   
-  # 有効化用メールを送信する
-    def send_activation_email
-      UserMailer.account_activation(self).deliver_now
-    end
+  # アカウントを無効にする
+  def inactive
+    update_column(activated: false, activated_at: nil)
+  end
+    
+  # 有効化トークンとダイジェストを作成および代入する
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
   
+  # 有効化用メールを送信する
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+    
+  # パスワード再設定の属性を設定する
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_column(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+  end
+  
+  # パスワード再設定のメールを送信する
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+  
+  # パスワード再設定の期限が切れていたらtrueを返す
+  def password_reset_expired?
+    reset_sent_at < 15.minutes.ago
+  end
   
   has_many :events
   
@@ -84,11 +110,5 @@ class User < ApplicationRecord
     # メールアドレスをすべて小文字にする
     def downcase_email
       self.email.downcase!
-    end
-    
-    # 有効化トークンとダイジェストを作成および代入する
-    def create_activation_digest
-      self.activation_token  = User.new_token
-      self.activation_digest = User.digest(activation_token)
     end
 end
