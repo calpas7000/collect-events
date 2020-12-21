@@ -33,7 +33,7 @@ class EventsController < ApplicationController
 
   def show
     @comment = @event.comments.build
-    @comments = @event.comments.order(id: :desc)
+    @comments = @event.comments.order(id: :asc)
     counts_event(@event)
   end
 

@@ -38,18 +38,18 @@ class UsersController < ApplicationController
       user_params[:password] = nil
       if @user.update(user_params)
         flash[:success] = "アカウントを更新しました。"
-        if user_params[:email].present? || @user.email != user_params[:email]
+        if user_params[:email].present? && @user.email != user_params[:email]
           @user.inactive
           @user.send_activation_email
           flash[:info] = "please check your email to activate your account."
         end
         redirect_to @user
       else
-        flash.now[:danger] = "アカウントの編集に失敗しました。"
+        flash[:danger] = "アカウントの編集に失敗しました。"
         redirect_to @user
       end
     else
-      flash.now[:danger] = "パスワードが一致しません"
+      flash[:danger] = "パスワードが一致しません"
       redirect_to @user
     end
   end

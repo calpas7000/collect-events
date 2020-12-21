@@ -1,10 +1,10 @@
 <ul class="list-unstyled">
-  <% comments.each do |comment| %>
+  <% comments.each.with_index(1) do |comment, i| %>
     <li class="media mb-3 bg-light rounded">
       <img class="mr-2 rounded" src="<%= gravatar_url(comment.user, { size: 50 }) %>" alt="">
       <div class="media-body">
         <div>
-          <p><span><%= comment.id %>. </span><%= comment.user.name %> <span class="text-muted">投稿日 <%= comment.created_at %></span></p>
+          <p><span><%= i %>. </span><%= comment.user.name %> <span class="text-muted">投稿日 <%= comment.created_at %></span></p>
           <% if current_user == comment.user or current_user == @event.user %>
             <a href="#" class="nav-link justify-content-end" data-toggle="dropdown"><i class="fas fa-pencil-alt"></i></a>
             <ul class="dropdown-menu dropdown-menu-right">
