@@ -62,3 +62,5 @@ gem "rinku"
 gem "carrierwave"
 
 gem "faker"
+
+gem "dotenv-rails"

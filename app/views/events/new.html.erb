@@ -9,7 +9,7 @@
       <%= render "layouts/error_messages", model: f.object %>
       
       <div class="form-group">
-        <%= f.label :title, 'タイトル' %>
+        <%= f.label :title, '大会名' %>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
       
@@ -20,6 +20,11 @@
                            min: Time.zone.now,
                            class: "form-control" %>
         </div>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :game_title, 'ゲームタイトル' %>
+        <%= f.text_field :game_title, class: 'form-control' %>
       </div>
       
       <div class="mb-2">
@@ -50,20 +55,15 @@
         <%= f.label :other, "other", class: "ml-2" %>
         <%= f.check_box :other %>
       </div>
-      
-      <div class="form-group">
-        <%= f.label :game_title, 'ゲームタイトル' %>
-        <%= f.text_field :game_title, class: 'form-control' %>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :entry, 'エントリー' %>
-        <%= f.text_area :entry, class: 'form-control' %>
-      </div>
 
       <div class="form-group">
         <%= f.label :content, '詳細' %>
         <%= f.text_area :content, class: 'form-control', rows: 5 %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :entry, '詳細URL、エントリー方法' %>
+        <%= f.text_area :entry, class: 'form-control' %>
       </div>
 
       <%= f.submit 'イベントを作成', class: 'btn btn-primary btn-block' %>
