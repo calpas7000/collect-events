@@ -1,7 +1,7 @@
 <div class="user_profile">
   <div class="row">
     <aside class="col-sm-2">
-      <%= render "users/icon", user: @user %>
+      <%= image_tag @user.image.thumb.url, class: "icon", alt: "UserIcon" %>
       <%= link_to "アバターを変更", edit_user_path(@user, edit: "image"), remote: true, class: "btn btn-outline-dark ml-3" %>
     </aside>
     <div class="col-sm-10">
