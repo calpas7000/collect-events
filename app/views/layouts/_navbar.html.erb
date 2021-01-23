@@ -1,34 +1,35 @@
 <header class="mb-4">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">eS-Board</a>
+  <nav class="navbar navbar-expand-sm justify-content-sm-center navbar-dark bg-dark">
+    <a class="navbar-brand mr-sm-5 pr-sm-5" href="/"><i class="fas fa-gamepad mr-2"></i>eS-Board</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <% if logged_in? %>
-          <li class="nav-item mr-3"><%= link_to "大会一覧", events_path, class: "nav-link" %></li>
-          <li class="nav-item mr-3"><%= link_to "参加者を募集する", new_event_path, class: "nav-link" %></li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to "アカウント管理", user_path(current_user) %></li>
-              <li class="dropdown-item"><%= link_to "お気に入り", favorites_user_path(current_user) %></li>
-              <li class="dropdown-item"><%= link_to "投稿一覧", events_user_path(current_user) %></li>
-              <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to "ログアウト", logout_path, method: :delete %></li>
-              <% if current_user.admin? %>
-                <li class="dropdown-item"><%= link_to "Users", admin_users_path %></li>
-              <% end %>
-            </ul>
-          </li>
-      　<% else %>
-          <li class="nav-item"><%= link_to "大会一覧" , events_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "アカウント登録", signup_path, class: "nav-link" %></li>
-          <li class="nav-item"><%= link_to "ログイン", login_path, class: "nav-link" %></li>
-        <% end %>
-      </ul>
+    <div class="d-sm-inline-block ml-sm-5 pl-sm-5">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <% if logged_in? %>
+            <li class="nav-item mr-3"><%= link_to "大会一覧", events_path, class: "nav-link" %></li>
+            <li class="nav-item mr-3"><%= link_to "参加者を募集する", new_event_path, class: "nav-link" %></li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-item"><%= link_to "アカウント管理", user_path(current_user) %></li>
+                <li class="dropdown-item"><%= link_to "お気に入り", favorites_user_path(current_user) %></li>
+                <li class="dropdown-item"><%= link_to "投稿一覧", events_user_path(current_user) %></li>
+                <li class="dropdown-divider"></li>
+                <li class="dropdown-item"><%= link_to "ログアウト", logout_path, method: :delete %></li>
+                <% if current_user.admin? %>
+                  <li class="dropdown-item"><%= link_to "Users", admin_users_path %></li>
+                <% end %>
+              </ul>
+            </li>
+        　<% else %>
+            <li class="nav-item mr-2"><%= link_to "大会一覧" , events_path, class: "nav-link" %></li>
+            <li class="nav-itemmr-2"><%= link_to "新規登録(無料)", signup_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "ログイン", login_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>

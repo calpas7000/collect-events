@@ -1,0 +1,17 @@
+<div class="text-center mb-4">
+  <h1><%= Time.zone.today.month %>月開催のイベント</h1>
+</div>
+
+<%= render "events/events", events: @this_month %>
+<%= paginate @this_month %>
+
+<div class="text-center mb-4">
+  <h1><%= @next_month_day.month %>月開催のイベント</h1>
+</div>
+
+<%= render "events/events", events: @next_month %>
+<%= paginate @next_month %>
+
+<div class="text-center mb-4">
+  <h2><%= link_to "さらに表示" , events_path %></h2>
+</div>

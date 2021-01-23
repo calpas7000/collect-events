@@ -1,17 +1,52 @@
-<div class="text-center mb-4">
-  <h1><%= Time.zone.today.month %>月開催のイベント</h1>
-</div>
-
-<%= render "events/events", events: @this_month %>
-<%= paginate @this_month %>
-
-<div class="text-center mb-4">
-  <h1><%= @next_month_day.month %>月開催のイベント</h1>
-</div>
-
-<%= render "events/events", events: @next_month %>
-<%= paginate @next_month %>
-
-<div class="text-center mb-4">
-  <h2><%= link_to "さらに表示" , events_path %></h2>
+<div class="text-center">
+  <section>
+    <div class="mb-3">
+      <h3>個人主催から公式大会まで<br>簡単に募集・すぐに参加できる<br>eSports大会掲示板</h2>
+    </div>
+    <div class="signup-button mb-3">
+      <%= link_to "Signup", signup_path, class: "btn btn-outline-primary" %>
+    </div>
+    <div class="events-lint-link mb-4">
+      <%= link_to "登録せずに大会一覧を見る", events_path, class: "text-muted border-bottom" %>
+    </div>
+  </section>
+  <section>
+    <div class="row m-0 py-4 border-top">
+      <div class="col-sm-4 offset-sm-2">
+        <%= image_tag "/images/虫眼鏡を持つ犬のイラスト.png", class: "img-fluid" %>
+      </div>
+      <div class="col-sm-4 mt-3">
+        <h5 class="font-weight-bold">検索機能ですぐに見つかる</h3>
+        <p>ワード検索、ゲームタイトル・プラットフォーム・開催日の絞り込みから、見たい募集が簡単に探せます。</p>
+        <div class="week-events-button mb-3">
+          <%= link_to "イベント一覧", events_path, class: "btn btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="row m-0 py-4 border-top">
+      <div class="col-sm-4 offset-sm-2 mt-3">
+        <h5 class="font-weight-bold">投稿主にその場で質問できる</h5>
+        <p>気になる大会をクリック、詳細ページから投稿者やその場の参加者とコメントでやり取りができます。</p>
+      </div>
+      <div class="col-sm-4">
+        <%= image_tag "/images/掲示板.png", class: "img-fluid" %>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="row m-0 py-4 border-top">
+      <div class="col-sm-4 offset-sm-2">
+        <%= image_tag "/images/求人募集の広告.png", class: "img-fluid" %>
+      </div>
+      <div class="col-sm-4 mt-3">
+        <h5 class="font-weight-bold">１ステップで参加者の募集ができる</h3>
+        <p>大会作成ページから大会概要を入力するだけで投稿完了、詳細ページからいつでも編集できます。</p>
+        <div class="week-events-button mb-3">
+          <%= link_to "今すぐ募集", new_event_path, class: "btn btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

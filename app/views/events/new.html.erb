@@ -9,7 +9,7 @@
       <%= render "layouts/error_messages", model: f.object %>
       
       <div class="form-group">
-        <%= f.label :title, '大会名' %>
+        <%= f.label :title, '大会名' %><span class="text-muted">（任意）</span>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
       
